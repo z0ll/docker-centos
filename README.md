@@ -6,7 +6,7 @@ Based on [tutum/centos](https://hub.docker.com/r/tutum/centos/) and [docker:dind
 
 Useful when you would like to for example test deploy scripts against a CentOS server utilizing ssh and having your applications running in Docker.
 
-Usage:
+**Usage:**
 
 ```docker run --privileged=true -p 2222:22 -e ROOT_PASS="mypass" sgfinans/centos```
 
