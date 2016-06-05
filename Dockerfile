@@ -1,7 +1,7 @@
 FROM centos:7
 
 RUN yum -y install openssh-server epel-release docker && \
-    yum install -y pwgen supervisor nano nmap && \
+    yum install -y pwgen supervisor nano nmap net-tools iptables-services wget && \
     rm -f /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_rsa_key && \
     ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_ecdsa_key && \
     ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key && \
