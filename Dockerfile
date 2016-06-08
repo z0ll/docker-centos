@@ -1,12 +1,15 @@
 FROM centos:7
 
 RUN yum -y install openssh-server epel-release docker && \
-    yum install -y pwgen supervisor nano net-tools less wget bash-completion && \
-    yum-builddep -y nmap && \
+    yum install -y pwgen supervisor nano net-tools less wget bash-completion nmap openvpn git && \
+    yum install -y python-devel pcre-devel openssl-devel lua-devel libtool libpcap-devel gettext-devel dos2unix automake autoconf && \
     rm -f /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_rsa_key && \
     ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_ecdsa_key && \
     ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key && \
-    sed -i "s/#UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config
+    sed -i "s/#UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && \
+    curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \
+  chmod 755 msfinstall && \
+  ./msfinstall
 
 ADD set_root_pw.sh /set_root_pw.sh
 ADD run.sh /run.sh
